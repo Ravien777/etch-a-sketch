@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Etch-a-Sketch</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+    <link rel="shortcut icon" href="#" />
+  </head>
+  <body>
+    <h1>Etch-a-Sketch</h1>
+    <div id="content">
+      <aside class="sidebar">
+        <div class="options">
+          <label for="c-size-select">Select size of canvas</label>
+          <select name="canva-size" id="c-size-select" onchange="gridSize()">
+            <option value="16">16x16</option>
+            <option value="24">24x24</option>
+            <option value="32">32x32</option>
+            <option value="40">40x40</option>
+            <option value="48">48x48</option>
+            <option value="56">56x56</option>
+            <option value="64">64x64</option>
+            <option value="72">72x72</option>
+            <option value="80">80x80</option>
+            <option value="88">88x88</option>
+            <option value="96">96x96</option>
+          </select>
+          <label for="brushColor">Select drawing color</label>
+          <input
+            type="color"
+            name="brushColor"
+            id="brushColor"
+            value="#ff0000"
+          />
+          <button onclick="brush()">Brush</button>
+          <button onclick="erase()">Eraser</button>
+          <button onclick="clearCanva()">Clear</button>
+        </div>
+      </aside>
+      <div id="container"></div>
+    </div>
+  </body>
+</html>
