@@ -6,19 +6,25 @@ document.getElementById("brushColor").onchange = () => {
 function addOrRemoveClass(toRem, toAdd) {
   const canvas = Array.from(document.querySelectorAll(".grid-items"));
   canvas.forEach((canva) => {
-    if (canva.classList.contains(toRem)) {
-      canva.classList.remove(toRem);
+    for (let index = 0; index < toRem.length; index++) {
+      if (canva.classList.contains(toRem[index])) {
+        canva.classList.remove(toRem[index]);
+      }
     }
     canva.classList.add(toAdd);
   });
 }
 
 function brush() {
-  addOrRemoveClass("erase", "brush");
+  addOrRemoveClass(["erase", "rainbow"], "brush");
 }
 
 function erase() {
-  addOrRemoveClass("brush", "erase");
+  addOrRemoveClass(["brush", "rainbow"], "erase");
+}
+
+function rainbow() {
+  addOrRemoveClass(["erase", "brush"], "rainbow");
 }
 
 function clearCanva() {
@@ -35,6 +41,9 @@ function setColor() {
 function colorDiv(div) {
   if (div.classList.contains("erase")) {
     div.style.backgroundColor = "white";
+  } else if (div.classList.contains("rainbow")) {
+    let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    div.style.backgroundColor = randomColor;
   } else {
     div.style.backgroundColor = setColor();
   }
