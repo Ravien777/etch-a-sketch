@@ -1,4 +1,9 @@
 const container = document.getElementById("container");
+const options = document.getElementById("options");
+const brushBtn = document.getElementById("brushBtn");
+const eraseBtn = document.getElementById("eraseBtn");
+const rainbowBtn = document.getElementById("rainbowBtn");
+
 document.getElementById("brushColor").onchange = () => {
   setColor();
 };
@@ -11,41 +16,65 @@ function addOrRemoveClass(toRem, toAdd) {
         canva.classList.remove(toRem[index]);
       }
     }
-    canva.classList.add(toAdd);
+    if (toAdd !== "" && toAdd !== null) {
+      canva.classList.add(toAdd);
+    }
   });
 }
 
-function brush() {
+function toggleActive(btn) {
+  Array.from(options.children).forEach((element) => {
+    element.classList.remove("active");
+  });
+  if (!btn.classList.contains("active")) {
+    btn.classList.add("active");
+  }
+}
+
+brushBtn.onclick = (e) => {
+  toggleActive(e.target);
   addOrRemoveClass(["erase", "rainbow"], "brush");
-}
+};
 
-function erase() {
+eraseBtn.onclick = (e) => {
+  toggleActive(e.target);
   addOrRemoveClass(["brush", "rainbow"], "erase");
-}
+};
 
-function rainbow() {
+rainbowBtn.onclick = (e) => {
+  toggleActive(e.target);
   addOrRemoveClass(["erase", "brush"], "rainbow");
-}
+};
 
 function clearCanva() {
   const canvas = document.querySelectorAll(".grid-items");
   canvas.forEach((canva) => {
     canva.style.backgroundColor = "white";
   });
+  toggleActive(brushBtn);
+  addOrRemoveClass(["erase", "rainbow"], "brush");
 }
 
 function setColor() {
   return document.getElementById("brushColor").value;
 }
 
-function colorDiv(div) {
-  if (div.classList.contains("erase")) {
-    div.style.backgroundColor = "white";
-  } else if (div.classList.contains("rainbow")) {
+let mouseDown = false;
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
+
+function colorDiv(e) {
+  if (e.type === "mouseover" && !mouseDown) {
+    addOrRemoveClass(["brush"], "");
+    return;
+  }
+  if (e.target.classList.contains("erase")) {
+    e.target.style.backgroundColor = "white";
+  } else if (e.target.classList.contains("rainbow")) {
     let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-    div.style.backgroundColor = randomColor;
+    e.target.style.backgroundColor = randomColor;
   } else {
-    div.style.backgroundColor = setColor();
+    e.target.style.backgroundColor = setColor();
   }
 }
 
@@ -55,7 +84,8 @@ function makeGrid(rows, cols) {
   for (let index = 0; index < rows * cols; index++) {
     var div = document.createElement("div");
     div.className = "grid-items";
-    div.setAttribute("onmouseenter", "colorDiv(this)");
+    div.addEventListener("mouseover", colorDiv);
+    div.addEventListener("mousedown", colorDiv);
     container.appendChild(div);
   }
 }

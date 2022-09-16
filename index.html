@@ -12,10 +12,15 @@
   <body>
     <h1>Etch-a-Sketch</h1>
     <div id="content">
-      <aside class="sidebar">
-        <div class="options">
-          <label for="c-size-select">Select size of canvas</label>
-          <select name="canva-size" id="c-size-select" onchange="gridSize()">
+      <div class="options" id="options">
+        <div>
+          <label for="c-size-select">Select size of canvas:</label>
+          <select
+            name="canva-size"
+            id="c-size-select"
+            onchange="gridSize()"
+            class="option-items"
+          >
             <option value="16">16x16</option>
             <option value="24">24x24</option>
             <option value="32">32x32</option>
@@ -28,19 +33,22 @@
             <option value="88">88x88</option>
             <option value="96">96x96</option>
           </select>
-          <label for="brushColor">Select drawing color</label>
+        </div>
+        <div>
+          <label for="brushColor">Select drawing color:</label>
           <input
             type="color"
             name="brushColor"
             id="brushColor"
             value="#ff0000"
+            class="option-items"
           />
-          <button onclick="brush()">Brush</button>
-          <button onclick="rainbow()">Rainbow Brush</button>
-          <button onclick="erase()">Eraser</button>
-          <button onclick="clearCanva()">Clear</button>
         </div>
-      </aside>
+        <button id="brushBtn" class="option-items active">Brush</button>
+        <button id="rainbowBtn" class="option-items">Rainbow Brush</button>
+        <button id="eraseBtn" class="option-items">Eraser</button>
+        <button onclick="clearCanva()" class="option-items">Clear</button>
+      </div>
       <div id="container"></div>
     </div>
   </body>
