@@ -4,9 +4,9 @@
 }
 
 body {
-  background-color: aqua;
+  background-color: rgb(152, 184, 252);
   font-family: cursive;
-  color: darkblue;
+  color: rgb(0, 0, 110);
   padding: 0 20px;
 }
 
@@ -31,17 +31,21 @@ h1 {
 }
 
 .option-items {
-  background-color: darkblue;
-  color: white;
   font-size: 16px;
   font-weight: 800;
-  border: 2px solid blue;
   border-radius: 10px;
   padding: 10px;
+  cursor: pointer;
+  position: relative;
+  color: rgb(243, 243, 253);
+  background: linear-gradient(180deg, #757aaf, #333e8a);
+  box-shadow: inset -8px 0 8px rgba(0, 0, 0, 0.15),
+    inset 0 -8px 8px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(53, 29, 2, 0.75),
+    10px 20px 25px rgba(0, 0, 0, 0.4);
 }
 
-button.option-items:hover {
-  background-color: rgb(34, 149, 151);
+button.option-items:hover, #c-size-select:hover {
+  background: linear-gradient(180deg, #2d39b5, #021069);
 }
 
 #brushColor,
@@ -53,8 +57,9 @@ button.option-items:hover {
   text-align: center;
 }
 
-#c-size-select:hover {
-  background-color: rgb(34, 149, 151);
+#c-size-select option {
+  background-color: #021069;
+  color: rgb(243, 243, 253);
 }
 
 #brushColor {
@@ -63,15 +68,18 @@ button.option-items:hover {
 }
 
 .active {
-  background-color: rgb(34, 149, 151);
+  background: linear-gradient(180deg, #2d39b5, #021069);
 }
 
 #container {
+  display: grid;
   width: 600px;
   height: 600px;
-  display: grid;
-  border: 2px solid darkblue;
   background-color: white;
+  border: 2px solid rgb(42, 42, 42);
+  box-shadow: 3px 5px 10px rgba(89, 89, 89, 0.568),
+    -3px -5px 10px rgba(89, 89, 89, 0.568);
+  border-radius: 2px;
   grid-template-rows: repeat(var(--grid-rows), 1fr);
   grid-template-columns: repeat(var(--grid-cols), 1fr);
 }
@@ -79,4 +87,17 @@ button.option-items:hover {
 .grid-items {
   text-align: center;
   user-select: none;
+}
+
+@media screen and (max-width: 750px) {
+  #content {
+    flex-direction: column-reverse;
+  }
+  #container {
+    width: 100%;
+    height: 70vh;
+  }
+  #options {
+    margin-bottom: 20px;
+  }
 }
